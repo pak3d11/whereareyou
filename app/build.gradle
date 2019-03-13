@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.kj_project.whereareyou"
-        minSdkVersion 21
+        minSdkVersion 26
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -25,4 +25,11 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation 'gun0912.ted:tedpermission:2.1.1'
+    implementation 'com.github.medyo:fancybuttons:1.8.4'
+    implementation 'com.github.tamir7.contacts:contacts:1.1.7'
+    implementation 'pl.charmas.android:android-reactive-location2:2.1@aar'
+    implementation 'com.google.android.gms:play-services-location:11.0.4' //you can use newer GMS version if you need
+    implementation 'com.google.android.gms:play-services-places:11.0.4'
+    implementation 'com.github.xizzhu:RxLocation:0.1.0'
 }
