@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">WhereAreYou</string>
+    <string name="preference_version">1</string>
+
+    <string name="phone_number">상대방 전화번호</string>
+    <string name="save_number">번호저장</string>
 </resources>
