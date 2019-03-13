@@ -13,7 +13,7 @@ public class LocationRequestService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        LocationManager.instance().retrieveLocationUpdate();
+//        LocationManager.instance().retrieveLocationUpdate();
     }
 
     @Override
