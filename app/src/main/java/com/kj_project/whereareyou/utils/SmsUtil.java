@@ -198,7 +198,7 @@ public class SmsUtil {
         }
 
         Uri uri = uriBuilder.build();
-        Cursor cursor = com.kj.kr.whereareyou.whereareyou.service.util_alt.SqliteWrapper.query(context, context.getContentResolver(),
+        Cursor cursor = com.kj_project.whereareyou.util_alt.SqliteWrapper.query(context, context.getContentResolver(),
                 uri, new String[]{"_id"}, null, null, null);
         if (cursor != null) {
             try {

@@ -45,6 +45,4 @@ public class SettingUtil {
     public String getPhoneNumber(){
         return preferences.getPreferences(this.settingCon, "setting", "phoneNumber", "0");
     }
-
-
 }

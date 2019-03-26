@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void layoutSetting(){
         saveNumber = findViewById(R.id.saveNumber);
-        setNumber = findViewById(R.id.setNumber);
+        setNumber =  findViewById(R.id.setNumber);
 
         //View Text Setting
         if (!setting.getPhoneNumber().equals("")) setNumber.setText(setting.getPhoneNumber());
@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected List<Contact> doInBackground(String... params) {
             String text = params[0];
-            String phoneNumber = "01071964459".replaceAll("-", "");;
+            String phoneNumber = setting.getPhoneNumber().replaceAll("-", "");
             if (TextUtils.isEmpty(phoneNumber)) {
                 return null;
             }
@@ -173,10 +173,7 @@ public class MainActivity extends AppCompatActivity {
 //                message.setImage(bitmap);
 //
 //            }
-
             transaction.sendNewMessage(message, Transaction.NO_THREAD_ID);
-
-
             return null;
         }
 

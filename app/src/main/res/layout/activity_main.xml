@@ -16,6 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/setNumber" />
 
+
     <EditText
         android:id="@+id/setNumber"
         android:layout_width="0dp"

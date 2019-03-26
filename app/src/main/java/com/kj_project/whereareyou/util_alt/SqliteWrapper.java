@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.kj.kr.whereareyou.whereareyou.service.util_alt;
+package com.kj_project.whereareyou.util_alt;
 
 import android.app.ActivityManager;
 import android.content.ContentResolver;

@@ -18,6 +18,7 @@ import android.util.Log;
 import com.github.tamir7.contacts.Contact;
 import com.github.tamir7.contacts.Contacts;
 import com.kj_project.whereareyou.MainActivity;
+import com.kj_project.whereareyou.utils.SettingUtil;
 import com.kj_project.whereareyou.utils.StringUtil;
 import com.klinker.android.send_message.ApnUtils;
 import com.klinker.android.send_message.Message;
@@ -34,6 +35,7 @@ import java.util.concurrent.TimeUnit;
 public class SmsReceiver extends BroadcastReceiver {
     private Handler handler = new Handler();
     Context smsReceiverContext;
+    String KEY_WORD = " - from where are you"; //문자 캐치 키워드
     private static final String CALLER_ID_SELECTION = " Data._ID IN "
             + " (SELECT DISTINCT lookup.data_id "
             + " FROM "
@@ -75,6 +77,7 @@ public class SmsReceiver extends BroadcastReceiver {
         boolean newSms = false;
         Contacts.initialize(context);
         smsReceiverContext  = context;
+        SettingUtil setting = new SettingUtil(smsReceiverContext);
         if (intent.getAction().equals("android.provider.Telephony.SMS_RECEIVED")) {
             Log.d("Choi Jinyoung", "문자받았다");
 
@@ -90,11 +93,19 @@ public class SmsReceiver extends BroadcastReceiver {
 
                         Log.d("choi", "문자 수신 번호 : " + phoneNumber);
 
-                        String formattedPhoneNumber = StringUtil.formattingPhoneNumber(phoneNumber);
+//                        String formattedPhoneNumber = StringUtil.formattingPhoneNumber(phoneNumber);
                         String msg = currentMessage.getDisplayMessageBody();
-                        if(!msg.equals("문자 수신시 전송테스트")){
+
+                        //@TODO (키워드 / 전화번호비교하는거)
+
+                        if(phoneNumber.equals(setting.getPhoneNumber()) && msg.contains(KEY_WORD)){
                             context.sendBroadcast(new Intent(MainActivity.ACTION_UPDATE_SMS_THREAD));
                         }
+
+
+
+
+
 
 
                         Date messageTime = new Date(currentMessage.getTimestampMillis());
@@ -108,12 +119,15 @@ public class SmsReceiver extends BroadcastReceiver {
                             return;
                         }
 
+
                         String format = bundle.getString("format");
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                             messages[i] = SmsMessage.createFromPdu((byte[]) pdusObj[i], format);
                         } else {
                             messages[i] = SmsMessage.createFromPdu((byte[]) pdusObj[i]);
                         }
+
+
 //                            try {
 //
 //                                if (Long.parseLong(SmsDetailActivity.notiThreadId) != SmsUtil.getThreadIdFromNumber(context, phoneNumber)) {
@@ -144,6 +158,7 @@ public class SmsReceiver extends BroadcastReceiver {
 
                     }
                     if (insertYn && values != null) {
+                        //안드로이드 디비에 문자 넣는거
                         context.getApplicationContext().getContentResolver().insert(Telephony.Sms.Inbox.CONTENT_URI, values);
 //                        if (!delete) {
 //                            LocalDBUtil.insertPerSms(context.getApplicationContext(), newSms);
