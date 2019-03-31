@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/send_sms_btn"
+        android:id="@+id/btn_send_sms"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/check_location"/>

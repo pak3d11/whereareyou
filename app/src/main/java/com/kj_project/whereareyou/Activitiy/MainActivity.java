@@ -165,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
     public void sendMsg() {
         send("문자 수신시 전송테스트", null);
     }
-    private void send(@Nullable String text, @Nullable Bitmap bitmap) {
+    public void send(@Nullable String text, @Nullable Bitmap bitmap) {
         new SendMessageAsyncTask(bitmap).execute(text);
     }
 
