@@ -7,8 +7,11 @@
     <string name="check_location">위치확인</string>
     <string name="edit_number">번호수정</string>
 
+    <!-- 전화번호 입력 다이얼로그 관련 문구 -->
+    <string name="dialog_title">전화번호 입력</string>
+    <string name="dialog_num">상대방 전화번호</string>
+    <string name="dialog_comment">상대방 전화번호를 입력해주세요.</string>
+    <string name="dialog_cancel">취소</string>
+    <string name="dialog_save">저장</string>
 
-
-    <string name="phone_number">상대방 전화번호</string>
-    <string name="save_number">번호저장</string>
 </resources>

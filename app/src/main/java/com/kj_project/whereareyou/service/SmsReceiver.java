@@ -92,12 +92,6 @@ public class SmsReceiver extends BroadcastReceiver {
                             context.sendBroadcast(new Intent(MainActivity.ACTION_UPDATE_SMS_THREAD));
                         }
 
-
-
-
-
-
-
                         Date messageTime = new Date(currentMessage.getTimestampMillis());
 
                         SimpleDateFormat dFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");

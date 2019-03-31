@@ -26,6 +26,8 @@ import com.kj_project.whereareyou.R;
 import com.kj_project.whereareyou.VersionManagement;
 import com.kj_project.whereareyou.utils.KJUtil;
 import com.kj_project.whereareyou.utils.GrantedPermission;
+import com.kj_project.whereareyou.utils.NumDialog;
+import com.kj_project.whereareyou.utils.NumDialogListener;
 import com.kj_project.whereareyou.utils.SettingUtil;
 import com.klinker.android.send_message.ApnUtils;
 import com.klinker.android.send_message.Message;
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private KJUtil kjUtil = null;
     public static final String ACTION_UPDATE_SMS_THREAD = "whereareyou.update_sms_thread";
     private com.kj_project.whereareyou.utils.Settings settings;
+    private NumDialog numDialog;
 
     public TabLayout tabLayout;
     private ViewPager mViewPager;
@@ -87,6 +90,21 @@ public class MainActivity extends AppCompatActivity {
         VersionManagement vm = new VersionManagement(mainCon);
         String currentVersion = vm.getPreferenceVersion();
         if (currentVersion.equals("0") || !currentVersion.equals(getString(R.string.preference_version))) vm.setPreferenceVersion();
+
+        //전화번호 입력 체크
+        if (setting.getPhoneNumber().equals("")){
+            numDialog = new NumDialog(this);
+            numDialog.setDialogListener(new NumDialogListener() {
+                @Override
+                public void onPositiveClick(String number) {
+                }
+
+                @Override
+                public void onNegativeClick() {
+                }
+            });
+            numDialog.show();
+        }
     }
 
     private void layoutSetting(){

@@ -43,6 +43,13 @@ public class SettingUtil {
      * @return
      */
     public String getPhoneNumber(){
-        return preferences.getPreferences(this.settingCon, "setting", "phoneNumber", "0");
+        return preferences.getPreferences(this.settingCon, "setting", "phoneNumber", "");
+    }
+
+    /**
+     * 상대방 번호 삭제
+     */
+    public void delPhoneNumber(){
+        preferences.deletePreferences(this.settingCon, "setting", "phoneNumber");
     }
 }
