@@ -2,6 +2,13 @@
     <string name="app_name">WhereAreYou</string>
     <string name="preference_version">1</string>
 
+    <string name="tab_send_sms">문자발송</string>
+    <string name="tab_setting">설정</string>
+    <string name="check_location">위치확인</string>
+    <string name="edit_number">번호수정</string>
+
+
+
     <string name="phone_number">상대방 전화번호</string>
     <string name="save_number">번호저장</string>
 </resources>

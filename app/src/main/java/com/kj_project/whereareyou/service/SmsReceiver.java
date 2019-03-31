@@ -4,29 +4,19 @@ import android.content.BroadcastReceiver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Telephony;
-import android.support.annotation.Nullable;
 import android.telephony.SmsMessage;
-import android.text.TextUtils;
 import android.util.Log;
 
-import com.github.tamir7.contacts.Contact;
 import com.github.tamir7.contacts.Contacts;
-import com.kj_project.whereareyou.MainActivity;
+import com.kj_project.whereareyou.Activitiy.MainActivity;
 import com.kj_project.whereareyou.utils.SettingUtil;
-import com.kj_project.whereareyou.utils.StringUtil;
-import com.klinker.android.send_message.ApnUtils;
-import com.klinker.android.send_message.Message;
-import com.klinker.android.send_message.Transaction;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**

@@ -1,4 +1,4 @@
-package com.kj_project.whereareyou;
+package com.kj_project.whereareyou.Activitiy;
 
 import android.Manifest;
 import android.content.BroadcastReceiver;
@@ -14,15 +14,16 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.provider.Telephony;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 
 import com.github.tamir7.contacts.Contact;
+import com.kj_project.whereareyou.R;
+import com.kj_project.whereareyou.VersionManagement;
 import com.kj_project.whereareyou.utils.KJUtil;
 import com.kj_project.whereareyou.utils.GrantedPermission;
 import com.kj_project.whereareyou.utils.SettingUtil;
@@ -37,10 +38,12 @@ public class MainActivity extends AppCompatActivity {
     private Context mainCon = null;
     private SettingUtil setting = null;
     private KJUtil kjUtil = null;
-    private EditText setNumber;
-    private Button saveNumber;
     public static final String ACTION_UPDATE_SMS_THREAD = "whereareyou.update_sms_thread";
     private com.kj_project.whereareyou.utils.Settings settings;
+
+    public TabLayout tabLayout;
+    private ViewPager mViewPager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,8 +58,8 @@ public class MainActivity extends AppCompatActivity {
         });
         this.registerReceiver(receiver, filter);
 
-//        initSetting();
-//        layoutSetting();
+        initSetting();
+        layoutSetting();
     }
 
     private BroadcastReceiver receiver = new BroadcastReceiver() {
@@ -72,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         checkPermissions();
     }
+
     //앱 실행 초기설정 함수
     private void initSetting(){
         mainCon = MainActivity.this;
@@ -86,18 +90,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void layoutSetting(){
-        saveNumber = findViewById(R.id.saveNumber);
-        setNumber =  findViewById(R.id.setNumber);
+        tabLayout = findViewById(R.id.tabLayout);
+        mViewPager = findViewById(R.id.view_pager);
 
-        //View Text Setting
-        if (!setting.getPhoneNumber().equals("")) setNumber.setText(setting.getPhoneNumber());
+        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.tab_send_sms)));
+        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.tab_setting)));
 
-        //View Event Setting
-        saveNumber.setOnClickListener(new View.OnClickListener() {
+        mViewPager.setAdapter(new AdapterMainVP(getSupportFragmentManager(), tabLayout.getTabCount()));
+
+        mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
-            public void onClick(View v) {
-                setting.setPhoneNumber(String.valueOf(setNumber.getText()));
-                kjUtil.kjLog("d", setting.getPhoneNumber());
+            public void onTabSelected(TabLayout.Tab tab) {
+                mViewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
 
             }
         });
