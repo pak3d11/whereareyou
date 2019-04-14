@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String ACTION_UPDATE_SMS_THREAD = "whereareyou.update_sms_thread";
     private com.kj_project.whereareyou.utils.Settings settings;
     private NumDialog numDialog;
-
+    boolean havePermission =false;
     public TabLayout tabLayout;
     private ViewPager mViewPager;
 
@@ -77,7 +77,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        checkPermissions();
+        if(!havePermission){
+            checkPermissions();
+        }
+
     }
 
     //앱 실행 초기설정 함수
@@ -148,17 +151,18 @@ public class MainActivity extends AppCompatActivity {
         if (enabledNotificationListeners == null || !enabledNotificationListeners.contains(packageName)) {
             isOnNotificationListener = false;
         }
-
+        //기본문자앱 체크
         String defaultSmsPackageName = Telephony.Sms.getDefaultSmsPackage(this);
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED
-                    || ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_CALL_LOG) != PackageManager.PERMISSION_GRANTED
-                    || !isOnNotificationListener
-                    || !defaultSmsPackageName.equals(getApplicationContext().getPackageName())) {
+                    || ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_CALL_LOG) != PackageManager.PERMISSION_GRANTED) {
 
                 GrantedPermission.getGrantedPermission(getApplicationContext() , this);
                 return;
+            }else{
+                //권한있음
+                havePermission = true;
             }
         }
     }
