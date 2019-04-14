@@ -22,6 +22,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.github.tamir7.contacts.Contact;
+import com.kj_project.whereareyou.Fragment.SettingFragment;
 import com.kj_project.whereareyou.R;
 import com.kj_project.whereareyou.VersionManagement;
 import com.kj_project.whereareyou.utils.KJUtil;
@@ -97,6 +98,8 @@ public class MainActivity extends AppCompatActivity {
             numDialog.setDialogListener(new NumDialogListener() {
                 @Override
                 public void onPositiveClick(String number) {
+                    SettingFragment sf = (SettingFragment)getSupportFragmentManager().findFragmentById(R.id.view_pager);
+                    sf.setResult(number);
                 }
 
                 @Override
